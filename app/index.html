@@ -18,18 +18,14 @@
   </head>
   <body>
     <div class="container">
-      <h1>ContentDesigner</h1>
+      <h1 style="display: inline-block;">ContentDesigner</h1>
+      <button style="display: inline-block;" id="export-html" class="btn btn-primary">ExportHtml</button>
+      <button style="display: inline-block;" id="export" class="btn btn-primary">Export</button>
+      <button style="display: inline-block;" id="import" class="btn btn-primary">Import</button>
       <form class="form-horizontal content-designer" role="form">
       </form>
       <div class="form-horizontal row">
-        <label class="col-md-1 control-label">Data</label>
-        <div class="col-md-4">
-          <textarea id="data" class="form-control" placeholder="Data"></textarea>
-        </div>
-        <div class="col-md-1">
-          <button id="export-html" class="btn btn-primary btn-xs">ExportHtml</button>
-          <button id="export" class="btn btn-primary btn-xs">Export</button>
-          <button id="import" class="btn btn-primary btn-xs">Import</button>
+        <div class="col-md-12">
         </div>
       </div>
     </div>
@@ -65,7 +61,9 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
+        <script src="scripts/ContentDesigner.js"></script>
+        <script src="scripts/ActionDesigner.js"></script>
+        <script src="scripts/demo.js"></script>
         <!-- endbuild -->
 </body>
 </html>
