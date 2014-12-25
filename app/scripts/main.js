@@ -4,22 +4,30 @@ $(function() {
       cid: 'EMPTY',
       name: 'Empty Cell',
       columns: 1,
-      html: '<div class="col-md-1 editable"></div>'
+      viewHtml: '<div class="col-md-1 editable"></div>'
     },
     {
       cid: 'TEXT',
       name: 'Text',
       columns: 4,
-      html: '<label class="col-md-2 control-label">Email</label>\
+      viewHtml: '<label class="col-md-2 control-label">Email</label>\
     <div class="col-md-2">\
-      <input type="email" class="form-control" placeholder="Email">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Email</label>\
+    <div class="col-md-2">\
+      <input type="email" class="form-control" placeholder="Email" value="{{>value}}">\
     </div>'
     },
     {
       cid: 'PASSWORD',
       name: 'Password',
       columns: 4,
-      html: '<label class="col-md-2 control-label">Password</label>\
+      viewHtml: '<label class="col-md-2 control-label">Password</label>\
+    <div class="col-md-2">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Password</label>\
     <div class="col-md-2">\
       <input type="password" class="form-control" placeholder="Password">\
     </div>'
@@ -28,7 +36,11 @@ $(function() {
       cid: 'SELECT',
       name: 'Select',
       columns: 4,
-      html: '<label class="col-md-2 control-label">Select</label>\
+      viewHtml: '<label class="col-md-2 control-label">Select</label>\
+    <div class="col-md-2">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Select</label>\
     <div class="col-md-2">\
       <select class="form-control" placeholder="Select">\
         <option value=""></option>\
@@ -42,7 +54,11 @@ $(function() {
       cid: 'HORIZONTAL_RADIO',
       name: 'Horizontal Radio',
       columns: 6,
-      html: '<label class="col-md-2 control-label">Horizontal Radio</label>\
+      viewHtml: '<label class="col-md-2 control-label">Horizontal </label>\
+    <div class="col-md-4">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Horizontal Radio</label>\
     <div class="col-md-4">\
       <label class="radio-inline">\
         <input type="radio" name="horizontalRadio" value="1">\
@@ -58,7 +74,11 @@ $(function() {
       cid: 'VERTICAL_RADIO',
       name: 'Vertical Radio',
       columns: 6,
-      html: '<label class="col-md-2 control-label">Vertical Radio</label>\
+      viewHtml: '<label class="col-md-2 control-label">Vertical Radio</label>\
+    <div class="col-md-4">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Vertical Radio</label>\
     <div class="col-md-4">\
       <div class="radio">\
         <label>\
@@ -78,7 +98,11 @@ $(function() {
       cid: 'HORIZONTAL_CHECKBOX',
       name: 'Horizontal Checkbox',
       columns: 6,
-      html: '<label class="col-md-2 control-label">Horizontal Checkbox</label>\
+      viewHtml: '<label class="col-md-2 control-label">Horizontal Checkbox</label>\
+    <div class="col-md-4">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Horizontal Checkbox</label>\
     <div class="col-md-4">\
       <label class="checkbox-inline">\
         <input type="checkbox" name="horizontalCheckbox" value="1">\
@@ -94,7 +118,11 @@ $(function() {
       cid: 'VERTICAL_CHECKBOX',
       name: 'Vertical Checkbox',
       columns: 6,
-      html: '<label class="col-md-2 control-label">Vertical Checkbox</label>\
+      viewHtml: '<label class="col-md-2 control-label">Vertical Checkbox</label>\
+    <div class="col-md-4">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Vertical Checkbox</label>\
     <div class="col-md-4">\
       <div class="checkbox">\
         <label>\
@@ -114,7 +142,11 @@ $(function() {
       cid: 'TEXTAREA',
       name: 'Textarea',
       columns: 6,
-      html: '<label class="col-md-2 control-label">Textarea</label>\
+      viewHtml: '<label class="col-md-2 control-label">Textarea</label>\
+    <div class="col-md-4">\
+      <p class="form-control-static">{{>value}}</p>\
+    </div>',
+      editHtml: '<label class="col-md-2 control-label">Textarea</label>\
     <div class="col-md-4">\
       <textarea class="form-control" placeholder="textarea"></textarea>\
       </select>\
@@ -139,6 +171,7 @@ $(function() {
                   <th>ID</th>\
                   <th>Name</th>\
                   <th>Columns</th>\
+                  <th>State</th>\
                   <th></th>\
                 </tr>\
               </thead>\
@@ -169,13 +202,21 @@ $(function() {
       $('<td/>').text(c.cid).appendTo($tr);
       $('<td/>').text(c.name).appendTo($tr);
       $('<td/>').text(c.columns).appendTo($tr);
+      var $checkboxTd = $('<td/>').appendTo($tr);
+      if (c.editHtml) {
+        $('<label><input type="radio" name="' + c.cid + '" value="edit"/> Edit</label>').appendTo($checkboxTd);
+        $('<span>&nbsp;</span>').appendTo($checkboxTd);
+      }
+      if (c.viewHtml) $('<label><input type="radio" name="' + c.cid + '" value="view"/> View</label>').appendTo($checkboxTd);
+      $checkboxTd.find('input[type="radio"]')[0].checked = true;
       $('<td><a href="javascript:void(0)" data-cid="' + c.cid + '" class="component-choose-button">Select</a></td>').appendTo($tr);
     });
     this._$modal.on('click', '.component-choose-button', function(e) {
       _this._$modal.modal('hide');
       var cid = $(this).data('cid');
+      var state = $(this).parents('tr').find('input[type="radio"]:checked').val();
       var component = _this._findComponent(cid);
-      _this._replaceContent(component);
+      _this._replaceContent(component, state);
     });
     this._$modal.on('keyup', 'input', function(e) {
       var value = $(this).val().toLowerCase();
@@ -191,7 +232,7 @@ $(function() {
     var _this = this;
     this.$el.on('click', '.editable', function(e) {
       _this._$modal.modal('show');
-      _this._$modal.find('input').val('');
+      _this._$modal.find('input[type="text"]').val('');
       _this._$modal.find('tr').show();
       _this._selectedId = $(this).data('dataid');
     });
@@ -250,7 +291,7 @@ $(function() {
     var component = this._findComponent(cell.cid);
     row.splice(selectedIndex.cellIndex, 1);
     for (var i = 0; i < component.columns; i++) {
-      row.splice(selectedIndex.cellIndex, 0, {id: this._nextSequence(), cid: 'EMPTY'});
+      row.splice(selectedIndex.cellIndex, 0, {id: this._nextSequence(), cid: 'EMPTY', state: 'view'});
     }
   }
   ContentDesigner.prototype._findIndex = function(dataId) {
@@ -270,7 +311,7 @@ $(function() {
     }
     return true;
   }
-  ContentDesigner.prototype._replaceContent = function(component) {
+  ContentDesigner.prototype._replaceContent = function(component, state) {
     var selectedIndex = this._findIndex(this._selectedId);
     if (!this._isReplaceable(component, selectedIndex)) {
       alert('配置するだけのスペースがありません');
@@ -280,7 +321,7 @@ $(function() {
     for (var i = 0; i < component.columns; i++) {
       row.splice(selectedIndex.cellIndex, 1);
     }
-    row.splice(selectedIndex.cellIndex, 0, { id: this._nextSequence(), cid: component.cid });
+    row.splice(selectedIndex.cellIndex, 0, { id: this._nextSequence(), cid: component.cid, state: state });
     this.render()
   }
   ContentDesigner.prototype._findComponent = function(cid) {
@@ -295,7 +336,7 @@ $(function() {
   }
   ContentDesigner.prototype._addRow = function(index) {
     var row = [];
-    for (var i = 0; i < 12; i++) row.push({id: this._nextSequence(), cid: 'EMPTY'});
+    for (var i = 0; i < 12; i++) row.push({id: this._nextSequence(), cid: 'EMPTY', state: 'view'});
     this._data.splice(index, 0, row);
   }
   ContentDesigner.prototype.import = function(str) {
@@ -325,8 +366,15 @@ $(function() {
     this._data.forEach(function(rowData, rowIndex) {
       var $row = $('<div class="row"></div>').appendTo(_this.$el);
       rowData.forEach(function(cellData) {
+        var template;
         var component = _this._findComponent(cellData.cid);
-        var $firstCell = $(component.html).appendTo($row).first();
+        if (cellData.state === 'edit') {
+          template = $.templates(component.editHtml);
+        } else {
+          template = $.templates(component.viewHtml);
+        }
+        var html = template.render({value: '><HOG>EHOGE\nkaigyo'});
+        var $firstCell = $(html).appendTo($row).first();
         $firstCell.attr('data-dataid', cellData.id);
         if (component.cid !== 'EMPTY') {
           $('<span class="alert-danger glyphicon glyphicon-remove delete-cell-button control"></span>').appendTo($firstCell).attr('data-dataid', cellData.id);
@@ -494,7 +542,6 @@ $(function() {
     this._data.forEach(function(action) {
       var $button;
       var component = _this._findComponent(action.cid);
-      console.log(component);
       if (component.type === 'link') {
         $button = $('<a class="btn"/>').addClass(component.style).text(component.label);
         $button.attr('href', action.url);

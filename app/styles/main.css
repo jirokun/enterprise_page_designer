@@ -75,3 +75,6 @@ body {
 .button-row {
   cursor: pointer;
 }
+.form-control-static {
+  white-space: pre-wrap;
+}
