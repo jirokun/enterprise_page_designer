@@ -1,10 +1,11 @@
 {
-  "name": "designer",
-  "private": true,
+  "name": "tmp",
+  "version": "0.0.1",
   "dependencies": {
     "bootstrap": "~3.2.0",
     "less": "~2.1.1",
     "js-beautify": "~1.5.4",
-    "jsrender": "~1.0.0-beta"
+    "jsrender": "~1.0.0-beta",
+    "jqueryui": "~1.11.2"
   }
 }

@@ -1,0 +1,91 @@
+body {
+  margin-bottom: 34px;
+  margin-top: 50px;
+}
+.editable {
+  border: 1px solid #ccc;
+  height: 34px;
+  cursor: pointer;
+}
+.editable.hover {
+  background-color: yellow;
+}
+.row {
+  position: relative;
+}
+.delete-row-button {
+  position: absolute;
+  top: 10px;
+  left: -80px;
+  background: transparent;
+  cursor: pointer;
+}
+.delete-cell-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+.insert-row-button {
+  position: absolute;
+  top: -6px;
+  left: -12px;
+  background: transparent;
+  cursor: pointer;
+}
+.add-row-button {
+  position: absolute;
+  top: 28px;
+  left: -12px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0px -2px 2px rgba(0,0,0,0.6);
+  height: 34px;
+  background: #fff;
+  z-index: 99;
+}
+
+.footer .edit-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.footer .action-container {
+  position: relative;
+}
+.footer .left-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.footer .right-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.button-row {
+  cursor: pointer;
+}
+.form-control-static {
+  white-space: pre-wrap;
+}
+.toolbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0px 2px rgba(0,0,0,0.6);
+  z-index: 1040;
+}
+.toolbox .component {
+  cursor: move;
+}

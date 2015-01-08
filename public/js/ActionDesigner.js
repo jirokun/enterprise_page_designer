@@ -1,4 +1,5 @@
-(function() {
+if (typeof(EPD) == 'undefined') EPD = {};
+(function(scope) {
   var buttons = [
     {
       cid: 'DETAIL',
@@ -154,5 +155,5 @@
       }
     });
   }
-  this.ActionDesigner = ActionDesigner;
-})(this);
+  scope.ActionDesigner = ActionDesigner;
+})(EPD);

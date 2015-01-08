@@ -1,13 +1,14 @@
 body {
   margin-bottom: 34px;
+  margin-top: 50px;
 }
 .editable {
   border: 1px solid #ccc;
   height: 34px;
   cursor: pointer;
-}
-.editable:hover {
-  background-color: yellow;
+  &.hover {
+    background-color: yellow;
+  }
 }
 .row {
   position: relative;
@@ -39,9 +40,6 @@ body {
   left: -12px;
   background: transparent;
   cursor: pointer;
-}
-.dragging-file {
-  background-color: #ffcccc;
 }
 
 .footer {
@@ -77,4 +75,17 @@ body {
 }
 .form-control-static {
   white-space: pre-wrap;
+}
+.toolbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0px 2px rgba(0,0,0,0.6);
+  z-index: 1040;
+  .component {
+    cursor: move;
+  }
 }
